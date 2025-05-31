@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 public class PlayerCam : MonoBehaviour
 {
     float xRotation, yRotation;
-    
-    float dist = 10f;
+    [SerializeField]
+    float dist = 100f;
     RaycastHit hit;
     [SerializeField]
     float sensX, sensY;
@@ -43,8 +43,8 @@ public class PlayerCam : MonoBehaviour
     void interaction() { 
         Ray interact = new Ray(this.transform.position, Vector3.forward);
         if (Physics.Raycast(interact, out hit, dist)) {
-            if (hit.collider.gameObject.CompareTag("Interactive") && Input.GetAxis("Fire1") == 1) {
-
+            if (hit.collider.gameObject.CompareTag("Interactive") && Input.GetKeyDown(KeyCode.E)) {
+                hit.collider.gameObject.GetComponent<AudioPlayer>().Changer();
             }
         }
     }
